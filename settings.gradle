@@ -1,0 +1,15 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+rootProject.name = "creedit-web-service"
+
+include "common"
+include "api-front"
+
+file("domain").eachDir {dir ->
+    include dir.name
+    project(":${dir.name}").projectDir = dir
+}
+
