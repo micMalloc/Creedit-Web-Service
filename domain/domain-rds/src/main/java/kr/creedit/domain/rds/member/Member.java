@@ -6,12 +6,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -31,53 +32,59 @@ public class Member implements UserDetails {
     private String password;
 
     @Column(name = "name", length = 50)
-    private String userName;
+    private String displayName;
 
     @Column(name = "auth")
     private String auth;
 
     @Builder
-    public Member(String email, String password, String userName, String auth) {
+    public Member(String email, String password, String displayName, String auth) {
         this.email = email;
         this.password = password;
-        this.userName = userName;
+        this.displayName = displayName;
         this.auth = auth;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> roles = new HashSet<>();
-        return null;
+        return Arrays.stream(auth.split(","))
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toSet());
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
+    // Unique 한 사용자 이름 반환 - email
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
+    // 계정 만료 여부
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
+    // 계정 잠금 여부
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
+    // 패스워드 만료 여부
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
+    // 계정 사용 가능 여부
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public void setAuthAsUser() {

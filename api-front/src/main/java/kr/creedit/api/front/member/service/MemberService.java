@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -22,7 +21,7 @@ public class MemberService implements UserDetailsService {
      * @param requestDto 회원 정보가 담긴 DTO
      * @return 저장된 회원의 고유 ID
      */
-    public Long saveMember(MemberDto.SignUp requestDto) {
+    public Long saveMember(MemberDto.Save requestDto) {
         requestDto.encodePassword();
 
         Member member = requestDto.toEntity();
