@@ -2,6 +2,7 @@ package kr.creedit.domain.rds.member;
 
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +16,7 @@ import java.util.Set;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
+@EqualsAndHashCode(of = "id")
 public class Member implements UserDetails {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,5 +78,9 @@ public class Member implements UserDetails {
     @Override
     public boolean isEnabled() {
         return false;
+    }
+
+    public void setAuthAsUser() {
+        this.auth = "USER";
     }
 }
