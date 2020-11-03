@@ -1,6 +1,7 @@
 package kr.creedit.api.front.member.service;
 
 import kr.creedit.api.front.member.dto.MemberDto;
+import kr.creedit.domain.rds.member.Member;
 import kr.creedit.domain.rds.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,11 +22,13 @@ public class MemberService implements UserDetailsService {
      * @param requestDto 회원 정보가 담긴 DTO
      * @return 저장된 회원의 고유 ID
      */
-    public Long saveMember(MemberDto.Save requestDto) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        requestDto.setPassword(encoder.encode(requestDto.getPassword()));
+    public Long saveMember(MemberDto.SignUp requestDto) {
+        requestDto.encodePassword();
 
-        return memberRepository.save(requestDto.toEntity())
+        Member member = requestDto.toEntity();
+        member.setAuthAsUser();
+
+        return memberRepository.save(member)
                 .getId();
     }
 
