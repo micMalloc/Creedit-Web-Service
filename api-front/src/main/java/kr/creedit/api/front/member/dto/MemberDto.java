@@ -12,10 +12,10 @@ public class MemberDto {
     @Getter
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class SignUp {
+    public static class Save {
         private String email;
         private String password;
-        private String userName;
+        private String displayName;
 
         public Member toEntity() {
             return MemberDtoMapper.INSTANCE.toEntity(this);

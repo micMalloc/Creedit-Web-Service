@@ -14,6 +14,6 @@ public interface MemberDtoMapper {
 
     @Mapping(target = "email", source = "dto.email")
     @Mapping(target = "password", source = "dto.password")
-    @Mapping(target = "userName", source = "dto.userName")
-    Member toEntity(MemberDto.SignUp dto);
+    @Mapping(target = "displayName", source = "dto.displayName")
+    Member toEntity(MemberDto.Save dto);
 }

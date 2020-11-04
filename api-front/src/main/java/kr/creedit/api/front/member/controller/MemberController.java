@@ -10,7 +10,7 @@ public class MemberController {
 
     @GetMapping("/sign-up")
     public String signUpForm(Model model) {
-        model.addAttribute("signUp", MemberDto.SignUp.builder().build());
+        model.addAttribute("save", MemberDto.Save.builder().build());
         return "member/sign-up";
     }
 }

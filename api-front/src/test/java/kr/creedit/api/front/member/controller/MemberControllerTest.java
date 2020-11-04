@@ -26,7 +26,6 @@ class MemberControllerTest {
         mockMvc.perform(get("/sign-up"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("member/sign-up"))
-                .andExpect(model().attributeExists("signUp")); // 해당 모델이 존재하느냐 (Controller에 준 model 이름)
+                .andExpect(model().attributeExists("save")); // 해당 모델이 존재하느냐 (Controller에 준 model 이름)
     }
-
 }
