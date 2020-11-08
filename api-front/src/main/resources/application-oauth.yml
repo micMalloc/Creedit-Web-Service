@@ -1,3 +1,4 @@
+# 해당 설정은 OAuth2LoginProperties.java 파일을 통해 읽어진다.
 spring:
   security:
     oauth2:

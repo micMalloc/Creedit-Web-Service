@@ -52,7 +52,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .logoutSuccessUrl("/login") // 로그아웃 성공시 리다이렉트 주소
                         .invalidateHttpSession(true) // 세션 날리기
                 .and()
-                    .oauth2Login() //OAuth2 로그인 설정을 시작한다.
+                    .oauth2Login()  //OAuth2 로그인 설정을 시작한다.
+                                    // 내가 application-oauth.yml 에 설정한 정보는 OAuth2ClientProperties를 통해 읽어진다.
+                                    // 해당 정보는 OAuth2ClientRegistrationRepositoryConfiguration 을 통해 들어있으며
+                                    // 해당 설정에서 적용되어 사용된다.
                         .userInfoEndpoint() // OAuth2 로그인 이후 사용자 정보를 가져올 때의 설정을 시작한다.
                             .userService(customOAuth2OAuthMemberService); // 소셜 로그인 성공 이후 후속 조치를 진행할 userService 인터페이스의 구현체를 등록한다.
                                                                           // 소셜 서비스에서 사용자 정보를 가져온 상태에서 추가로 진행할 기능을 명시할 수 있다.
