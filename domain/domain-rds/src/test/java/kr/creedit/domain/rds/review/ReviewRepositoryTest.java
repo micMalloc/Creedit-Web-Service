@@ -5,12 +5,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ActiveProfiles({"domain-rds", "local"})
 @DataJpaTest
 class ReviewRepositoryTest {
 
@@ -41,8 +43,8 @@ class ReviewRepositoryTest {
         assertEquals(review.getAuthor(), saved.getAuthor());
         assertEquals(review.getCategoryId(), saved.getCategoryId());
         assertEquals(review.getComment(), saved.getComment());
-        assertEquals(review.getCreatedDate(), saved.getCreatedDate());
-        assertEquals(review.getCreatedDate(), saved.getLastModifiedDate());
+        assertEquals(review.getCreateAt(), saved.getCreateAt());
+        assertEquals(review.getCreateAt(), saved.getModifiedAt());
     }
 
     @DisplayName("리뷰 조회 테스트 - ID")
@@ -68,8 +70,8 @@ class ReviewRepositoryTest {
         assertEquals(review.getAuthor(), saved.getAuthor());
         assertEquals(review.getCategoryId(), saved.getCategoryId());
         assertEquals(review.getComment(), saved.getComment());
-        assertEquals(review.getCreatedDate(), saved.getCreatedDate());
-        assertEquals(review.getLastModifiedDate(), saved.getLastModifiedDate());
+        assertEquals(review.getCreateAt(), saved.getCreateAt());
+        assertEquals(review.getModifiedAt(), saved.getModifiedAt());
     }
 
     @DisplayName("리뷰 댓글 수정 테스트")
