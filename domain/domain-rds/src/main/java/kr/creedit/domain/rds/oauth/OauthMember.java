@@ -1,5 +1,6 @@
-package kr.creedit.domain.rds.member;
+package kr.creedit.domain.rds.oauth;
 
+import kr.creedit.domain.rds.role.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

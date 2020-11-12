@@ -1,4 +1,4 @@
-package kr.creedit.domain.rds.member;
+package kr.creedit.domain.rds.role;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

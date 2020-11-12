@@ -1,10 +1,9 @@
 package kr.creedit.api.front.member.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.creedit.api.front.member.OAuthAttributes;
-import kr.creedit.api.front.member.SessionOauthMember;
-import kr.creedit.domain.rds.member.OauthMember;
-import kr.creedit.domain.rds.member.OauthMemberRepository;
+import kr.creedit.api.front.member.dto.OAuthMemberDto;
+import kr.creedit.api.front.member.SessionMember;
+import kr.creedit.domain.rds.oauth.OauthMember;
+import kr.creedit.domain.rds.oauth.OauthMemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -38,7 +37,7 @@ import java.util.Collections;
 
 @RequiredArgsConstructor
 @Service
-public class CustomOAuth2OAuthMemberService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+public class OAuthMemberService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     private final OauthMemberRepository oauthMemberRepository;
     private final HttpSession httpSession;
 
@@ -71,11 +70,11 @@ public class CustomOAuth2OAuthMemberService implements OAuth2UserService<OAuth2U
                 .getUserInfoEndpoint()
                 .getUserNameAttributeName();
 
-        OAuthAttributes attributes = OAuthAttributes
+        OAuthMemberDto attributes = OAuthMemberDto
                 .of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
         OauthMember oauthMember = saveOrUpdate(attributes);
-        httpSession.setAttribute("oauthMember", new SessionOauthMember(oauthMember));
+        httpSession.setAttribute("oauthMember", new SessionMember(oauthMember));
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(oauthMember.getRoleKey())),
@@ -84,7 +83,7 @@ public class CustomOAuth2OAuthMemberService implements OAuth2UserService<OAuth2U
         );
     }
 
-    private OauthMember saveOrUpdate(OAuthAttributes attributes) {
+    private OauthMember saveOrUpdate(OAuthMemberDto attributes) {
         OauthMember oauthMember = oauthMemberRepository.findByEmail(attributes.getEmail())
                 .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
                 .orElse(attributes.toEntity());

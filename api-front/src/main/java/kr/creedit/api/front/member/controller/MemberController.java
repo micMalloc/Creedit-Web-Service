@@ -1,6 +1,6 @@
 package kr.creedit.api.front.member.controller;
 
-import kr.creedit.api.front.member.SessionOauthMember;
+import kr.creedit.api.front.member.SessionMember;
 import kr.creedit.api.front.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ public class MemberController {
     @GetMapping("/test")
     public String test(Model model) {
 
-        SessionOauthMember oauthMember = (SessionOauthMember) httpSession.getAttribute("oauthMember");
+        SessionMember oauthMember = (SessionMember) httpSession.getAttribute("oauthMember");
 
         if(oauthMember != null) {
             model.addAttribute("userName", oauthMember.getName());
