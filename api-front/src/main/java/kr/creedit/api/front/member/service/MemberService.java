@@ -39,7 +39,7 @@ public class MemberService implements UserDetailsService {
      * @throws UsernameNotFoundException 해당 email에 매핑된 사용자 정보가 없는 경우 발생
      */
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) {
         return memberRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(email));
     }

@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @RequiredArgsConstructor
-// 내가 웹 설정을 다 하겠다는 Annotation EnableWebSecurity, Configuration
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -38,26 +37,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().headers().frameOptions().disable()
                 .and()
                     .authorizeRequests()
-                        .antMatchers("/login", "/sign-up", "/user").permitAll() // 누구나 접근 허용
-                        .antMatchers("/").hasRole("USER") // USER, ADMIN만 접근 가능
-                        .antMatchers("/admin").hasRole("ADMIN") // ADMIN만 접근 가능
-                        .anyRequest().authenticated() // 나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근 가능
+                        .antMatchers("/login", "/sign-up", "/user", "/has-role").permitAll()
+                        .antMatchers("/").hasRole("USER")
+                        .antMatchers("/admin").hasRole("ADMIN")
+                        .anyRequest().authenticated()
                 .and()
                     .formLogin() // 8
-                        .loginPage("/login") // 로그인 페이지 링크
-                        .defaultSuccessUrl("/") // 로그인 성공 후 리다이렉트 주소
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/")
                 .and()
                     .logout() // 9
-                        .logoutSuccessUrl("/login") // 로그아웃 성공시 리다이렉트 주소
-                        .invalidateHttpSession(true) // 세션 날리기
+                        .logoutSuccessUrl("/login")
+                        .invalidateHttpSession(true)
                 .and()
-                    .oauth2Login()  //OAuth2 로그인 설정을 시작한다.
-                                    // 내가 application-oauth.yml 에 설정한 정보는 OAuth2ClientProperties를 통해 읽어진다.
-                                    // 해당 정보는 OAuth2ClientRegistrationRepositoryConfiguration 을 통해 들어있으며
-                                    // 해당 설정에서 적용되어 사용된다.
-                        .userInfoEndpoint() // OAuth2 로그인 이후 사용자 정보를 가져올 때의 설정을 시작한다.
-                            .userService(OAuthMemberService); // 소셜 로그인 성공 이후 후속 조치를 진행할 userService 인터페이스의 구현체를 등록한다.
-                                                                          // 소셜 서비스에서 사용자 정보를 가져온 상태에서 추가로 진행할 기능을 명시할 수 있다.
+                    .oauth2Login()
+                        .userInfoEndpoint()
+                            .userService(OAuthMemberService);
     }
 
     @Override

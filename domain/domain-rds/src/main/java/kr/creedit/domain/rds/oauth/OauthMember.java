@@ -27,24 +27,19 @@ public class OauthMember {
     @Column(nullable = false)
     private String email;
 
-    @Column
-    private String picture;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
     @Builder
-    public OauthMember(String name, String email, String picture, Role role) {
+    public OauthMember(String name, String email, Role role) {
         this.name = name;
         this.email = email;
-        this.picture = picture;
         this.role = role;
     }
 
-    public OauthMember update(String name, String picture) {
+    public OauthMember update(String name) {
         this.name = name;
-        this.picture = picture;
 
         return this;
     }

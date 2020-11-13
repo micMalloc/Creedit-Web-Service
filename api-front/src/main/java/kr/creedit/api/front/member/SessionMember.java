@@ -9,12 +9,10 @@ import java.io.Serializable;
 public class SessionMember implements Serializable {
     private String name;
     private String email;
-    private String picture;
 
     public SessionMember(OauthMember oauthMember) {
         this.name = oauthMember.getName();
         this.email = oauthMember.getEmail();
-        this.picture = oauthMember.getPicture();
     }
 }
 

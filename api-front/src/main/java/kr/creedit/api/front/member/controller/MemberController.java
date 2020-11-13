@@ -1,5 +1,6 @@
 package kr.creedit.api.front.member.controller;
 
+import kr.creedit.api.front.config.LoginMember;
 import kr.creedit.api.front.member.SessionMember;
 import kr.creedit.api.front.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
@@ -7,13 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.servlet.http.HttpSession;
-
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
-
-    private final HttpSession httpSession;
 
     @GetMapping("/sign-up")
     public String signUpForm(Model model) {
@@ -21,15 +18,12 @@ public class MemberController {
         return "member/sign-up";
     }
 
-    @GetMapping("/test")
-    public String test(Model model) {
-
-        SessionMember oauthMember = (SessionMember) httpSession.getAttribute("oauthMember");
-
-        if(oauthMember != null) {
-            model.addAttribute("userName", oauthMember.getName());
+    @GetMapping("/has-role")
+    public String hasRole(@LoginMember SessionMember sessionMember) {
+        if(sessionMember == null) {
+            return "member/no-role";
         }
 
-        return "test";
+        return "member/has-role";
     }
 }
