@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -23,8 +24,9 @@ class MemberControllerTest {
     @Test
     void signUpForm() throws Exception {
         mockMvc.perform(get("/sign-up"))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("member/sign-up"))
-                .andExpect(model().attributeExists("save")); // 해당 모델이 존재하느냐 (Controller에 준 model 이름)
+                .andExpect(model().attributeExists("save"));
     }
 }
