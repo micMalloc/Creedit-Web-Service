@@ -6,10 +6,15 @@ pluginManagement {
 rootProject.name = "creedit-web-service"
 
 include "common"
-include "api-front"
+include "creedit-api"
+include 'creedit-batch'
 
-file("domain").eachDir {dir ->
+file("creedit-domain").eachDir {dir ->
     include dir.name
     project(":${dir.name}").projectDir = dir
 }
 
+file("creedit-clients").eachDir {dir ->
+    include dir.name
+    project(":${dir.name}").projectDir = dir
+}
