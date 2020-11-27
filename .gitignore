@@ -1,31 +1,34 @@
-.gradle
-build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**
-!**/src/test/**
+# Created by .ignore support plugin (hsz.mobi)
+### Java template
+*.class
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# Package Files #
+*.jar
+*.war
+*.ear
 
-### IntelliJ IDEA ###
+### macOS template
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# IntelliJ project files
 .idea
-*.iws
+.idea/*.xml
 *.iml
-*.ipr
-out/
+out
+gen
+build
+rebel.xml
+application-oauth.properties
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+# Compliled files
+/target/
+**/target
 
-### VS Code ###
-.vscode/
+/example/
+
+# Gradle
+.gradle
+/build/
+.gradletasknamecache

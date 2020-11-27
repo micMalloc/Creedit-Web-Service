@@ -6,7 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Getter
 @NoArgsConstructor
@@ -21,7 +25,7 @@ public class Review extends BaseTimeEntity {
     private String comment;
 
     @Column(nullable = false)
-    private int rate;
+    private int rate; // 평점
 
     @Column(nullable = false, length = 50)
     private String author;
