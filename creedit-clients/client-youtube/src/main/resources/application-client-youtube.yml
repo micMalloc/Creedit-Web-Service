@@ -1,0 +1,29 @@
+---
+spring:
+  profiles: test
+
+client:
+  youtube:
+    host: https://www.googleapis.com/youtube
+    timeout: 5000
+    token:
+
+---
+spring:
+  profiles: local
+
+client:
+  youtube:
+    host: https://www.googleapis.com/youtube
+    timeout: 5000
+    token:
+
+---
+spring:
+  profiles: prod
+
+client:
+  youtube:
+    host: https://www.googleapis.com/youtube
+    timeout: 5000
+    token:

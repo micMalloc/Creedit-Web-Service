@@ -33,9 +33,3 @@ subprojects {
         useJUnitPlatform()
     }
 }
-
-configure(subprojects.findAll {it.name != "common"}) {
-    dependencies {
-        implementation project(":common")
-    }
-}
