@@ -1,7 +1,7 @@
 package kr.creedit.api.front.config;
 
-import kr.creedit.api.front.member.service.OAuthMemberService;
 import kr.creedit.api.front.member.service.MemberService;
+import kr.creedit.api.front.member.service.OAuthMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

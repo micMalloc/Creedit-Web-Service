@@ -1,7 +1,7 @@
 package kr.creedit.api.front.member.service;
 
-import kr.creedit.api.front.member.dto.OAuthMemberDto;
 import kr.creedit.api.front.member.SessionMember;
+import kr.creedit.api.front.member.dto.OAuthMemberDto;
 import kr.creedit.domain.rds.oauth.OauthMember;
 import kr.creedit.domain.rds.oauth.OauthMemberRepository;
 import lombok.RequiredArgsConstructor;

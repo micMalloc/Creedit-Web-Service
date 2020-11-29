@@ -1,7 +1,5 @@
 package kr.creedit.domain.rds.youtube.statistics;
 
-import kr.creedit.domain.rds.youtube.channel.Channel;
-
 import javax.persistence.Embeddable;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
