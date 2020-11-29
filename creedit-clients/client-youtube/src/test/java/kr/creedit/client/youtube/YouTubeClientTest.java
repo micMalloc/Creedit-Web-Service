@@ -1,10 +1,12 @@
 package kr.creedit.client.youtube;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.creedit.client.youtube.dto.ChannelStatisticsDto;
 import kr.creedit.domain.rds.youtube.statistics.Statistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -18,14 +20,18 @@ class YouTubeClientTest {
     @Autowired
     private YouTubeClient youTubeClient;
 
+    @Value("${client.youtube.token}")
+    private String token;
+
     @DisplayName("채널 통계 정보 획득 테스트")
     @Test
-    void getStatisticsForChannel_test() {
+    void getStatisticsForChannel_test() throws JsonProcessingException {
         // given
+        System.out.println("token : " + token);
         String channelId = "UCqI5lyTpC79pOy2D-VXAMdA";
 
         // when
-        ChannelStatisticsDto response = youTubeClient.getStatisticsByChannel(channelId)
+        ChannelStatisticsDto.Response response = youTubeClient.getStatisticsByChannel(channelId)
                 .block();
 
         // then
@@ -40,7 +46,7 @@ class YouTubeClientTest {
         String channelId = "no channel";
 
         // when
-        ChannelStatisticsDto response = youTubeClient.getStatisticsByChannel(channelId)
+        ChannelStatisticsDto.Response response = youTubeClient.getStatisticsByChannel(channelId)
                 .block();
 
         // then
@@ -48,4 +54,5 @@ class YouTubeClientTest {
         assertThatThrownBy(response::getStatistics)
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
 }
