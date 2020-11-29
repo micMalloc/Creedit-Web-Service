@@ -34,7 +34,7 @@ public class Statistics extends BaseTimeEntity {
     @Column(nullable = false)
     private Long subscriberCount;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long commentCount;
 
     @Column(nullable = false)

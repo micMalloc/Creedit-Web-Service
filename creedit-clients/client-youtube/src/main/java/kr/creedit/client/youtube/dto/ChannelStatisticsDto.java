@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,21 +14,28 @@ import java.util.Optional;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChannelStatisticsDto {
 
-    public static final ChannelStatisticsDto EMPTY = new ChannelStatisticsDto();
-
-    private List<Item> items;
-
-    public Statistics getStatistics() {
-        return Optional.ofNullable(items)
-                .map(item -> item.get(0))
-                .map(Item::toEntity)
-                .orElseThrow(IllegalArgumentException::new);
-    }
+    public static final ChannelStatisticsDto.Response EMPTY_RESPONSE = new ChannelStatisticsDto.Response();
 
     @Getter
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
-    private static class Item {
+    public static class Response {
+        private List<Item> items = new ArrayList<>();
+
+        public Statistics getStatistics() {
+            return Optional.ofNullable(items)
+                    .map(item -> item.get(0))
+                    .map(Item::toEntity)
+                    .orElseThrow(IllegalArgumentException::new);
+        }
+    }
+
+
+
+    @Getter
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class Item {
         private StatisticsDto statistics;
 
         private Statistics toEntity() {
@@ -38,8 +46,8 @@ public class ChannelStatisticsDto {
     @Getter
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
-    private static class StatisticsDto {
 
+    public static class StatisticsDto {
         private Long viewCount;
         private Long subscriberCount;
         private boolean hiddenSubscriberCount;
