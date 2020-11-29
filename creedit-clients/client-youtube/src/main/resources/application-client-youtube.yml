@@ -6,7 +6,7 @@ client:
   youtube:
     host: https://www.googleapis.com/youtube
     timeout: 5000
-    token:
+    token: AIzaSyC5didUPL_gr0qQmOSGkiTm-nTYAsyhF1s
 
 ---
 spring:
