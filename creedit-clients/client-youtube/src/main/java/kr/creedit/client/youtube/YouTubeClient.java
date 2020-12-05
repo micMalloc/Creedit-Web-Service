@@ -17,9 +17,6 @@ public class YouTubeClient {
     private final String token;
 
     public Mono<ChannelStatisticsDto.Response> getStatisticsByChannel(String channelId) {
-        log.info(">>>>>>> part : {}", STATISTICS);
-        log.info(">>>>>>> channelId : {}", channelId);
-        log.info(">>>>>>> token : {}", token);
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder.path(CHANNEL)
                         .queryParam("part", STATISTICS)
@@ -28,7 +25,10 @@ public class YouTubeClient {
                         .build())
                 .retrieve()
                 .bodyToMono(ChannelStatisticsDto.Response.class)
-                .doOnError(error -> log.error("YouTube Data API 호출하는 과정에서 에러가 발생하였습니다.", error))
+                .doOnError(error -> {
+                    log.error("[CUSTOM CLIENT ERROR] YouTube Data API 호출하는 과정에서 에러가 발생하였습니다.", error);
+                    throw new IllegalArgumentException("error");
+                })
                 .onErrorReturn(ChannelStatisticsDto.EMPTY_RESPONSE);
     }
 }

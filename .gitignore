@@ -32,3 +32,6 @@ application-oauth.properties
 .gradle
 /build/
 .gradletasknamecache
+
+# QueryDsl
+/creedit-domain/domain-rds/src/main/generated/

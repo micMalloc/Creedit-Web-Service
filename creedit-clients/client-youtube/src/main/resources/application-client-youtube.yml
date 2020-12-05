@@ -20,6 +20,16 @@ client:
 
 ---
 spring:
+  profiles: batch
+
+client:
+  youtube:
+    host: https://www.googleapis.com/youtube
+    timeout: 5000
+    token:
+
+---
+spring:
   profiles: prod
 
 client:

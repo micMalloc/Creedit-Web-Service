@@ -45,6 +45,33 @@ logging:
 
 ---
 spring:
+  profiles: batch
+
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/spring_batch?serverTimezone=Asia/Seoul
+      username: root
+      password:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: create
+      use-new-id-generator-mappings: false
+    show-sql: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type:
+          descriptor:
+            sql:
+              BasicBinder: trace
+---
+spring:
   profiles: prod
 
   datasource:
@@ -62,4 +89,3 @@ spring:
     hibernate:
       ddl-auto: none
     generate-ddl: false
-
